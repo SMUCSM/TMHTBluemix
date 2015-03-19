@@ -28,6 +28,7 @@
 - [Top 15 tutorials of 2014](http://www.ibm.com/developerworks/cloud/library/cl-bestoflbluemix2014/)
 - [iOS App](http://www.ibm.com/developerworks/library/mo-ios-mobiledata-app/)
 - [Java Apps](http://www.ibm.com/developerworks/library/d-bluemix-javadevops/index.html)
+- [Rails Blog](http://www.ibm.com/developerworks/cloud/library/cl-blograils-app/)
 
 ## NPM Packages
 - [Alchemy API](https://www.npmjs.com/package/alchemy-api)
