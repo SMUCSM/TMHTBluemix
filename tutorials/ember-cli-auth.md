@@ -119,18 +119,41 @@ ENV['torii'] = {
 - Test by running `ember server`
 
 ## Deploy to bluemix
-- Do the initial push. Be sure to pick a unique app name or this process may fail (it takes a while)
-```bash
-cf push ember-cli-auth-test -b https://github.com/tonycoco/heroku-buildpack-ember-cli.git
+- In the bluemix web interface create a new Node.js application
+- Don't initialize the app with starter code, but rather download the starter code from the CF command line interface tab.
+- Copy app.js and manifest.yml to the root directory of your ember project
+- Modify package.json to include express
+```json
+"dependencies": {
+    "express": "3.4.7",
+    "torii": "^0.2.3"
+}
 ```
-- After this process finishes you will get a url where your app is hosted. Copy this
+- Modify app.js to get rid of jade and use ember-cli's build directory
+```javascript
+// setup middleware
+var app = express();
+app.use(app.router);
+app.use(express.errorHandler());
+app.use(express.static(__dirname + '/dist')); //This changes to /dist where ember-cli builds to
+
+// YOU CAN REMOVE THE BELOW LINES, left in to show difference
+
+// app.set('view engine', 'jade');
+// app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
+
+// render index page
+// app.get('/', function(req, res){
+// 	res.render('index');
+// });
+```
 - We now have to change our `Authorization callback URL` on our [Github app page](https://github.com/settings/applications/) to match the bluemix url
 - We also have to update `redirectUri` to match in config/environment.js. Don't forget to add `http://` at the beginning!
-- Now redeploy!
+- Build the project `ember build`
+- Push to bluemix (you can also get the command from the CF tab in the bluemix interface)
 ```bash
 cf push ember-cli-auth-test
 ```
 
 ## Notes
 - Don't `ADD GIT` in the bluemix web interface, it won't work and may give you unintended results
-- If you are doing this tutorial from [nitrous.io](https://nitrous.io) we recommend you just skip the http://localhost:4200 and go directly to `http://yourAppName.mybluemix.net` as you can't run `ember server` from there
