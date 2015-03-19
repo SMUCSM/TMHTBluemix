@@ -18,11 +18,11 @@ Lets show a bit more complicated of an app that uses Ember-CLI and github authen
 "ember-cli": "ember-cli/ember-cli",
 ```
 - Now run `npm install` this will take a while
-- Get some dependencies
+- Get some dependencies, Note we are using a specific version of torii because of [this bug](https://github.com/Vestorly/torii/issues/156)
 ```
 ember install:addon ember-cli-simple-auth
 ember install:addon ember-cli-simple-auth-torii
-npm install --save-dev torii
+npm install --save-dev torii@0.2.3
 ```
 - Setup our basic app structure
 ```
